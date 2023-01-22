@@ -4,6 +4,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var s string
+
 var ipCmd = &cobra.Command{
 	Use:   "ip",
 	Short: "view my network's external IP",
@@ -14,4 +16,8 @@ var ipCmd = &cobra.Command{
 
 func Cmd() *cobra.Command {
 	return ipCmd
+}
+
+func init() {
+	ipCmd.Flags().StringVarP(&s, "site", "s", "", "site to ask for my IP")
 }

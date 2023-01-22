@@ -30,6 +30,10 @@ var sites = []string{
 
 func run() error {
 
+	if s != "" {
+		sites = []string{s}
+	}
+
 	var chRes chan string = make(chan string, len(sites))
 
 	defer func() {

@@ -12,11 +12,18 @@ GOBUILD = env CGO_ENABLED=0 $(GO_DIR)go build -tags "full" -trimpath -ldflags="-
 
 all: build
 
-build: linux-armv8
+build: 
+	$(GOBUILD)
+
+release: linux-amd64 linux-armv8
 
 linux-armv8:
-	mkdir -p $(BUILD_DIR)/$@
-	GOARCH=arm64 GOOS=linux $(GOBUILD)/$@
+	mkdir -p $(BUILD_DIR)
+	GOARCH=arm64 GOOS=linux $(GOBUILD)/$(NAME)-$@
+
+linux-amd64:
+	mkdir -p $(BUILD_DIR)
+	GOARCH=amd64 GOOS=linux $(GOBUILD)/$(NAME)-$@
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)/*
